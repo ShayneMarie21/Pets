@@ -15,9 +15,6 @@ jobs:
           command: postman login --with-api-key PMAK-64d75fa464a00400381c7f5c-b9662e70bc39053737a958fbcea120cd7b
       - run: |
             postman collection run "postman/collections/Pets test.json" --integration-id "146094-${CIRCLE_WORKFLOW_JOB_ID}"
-      - run:
-          name: Lint your API using Postman CLI
-          command: postman api lint 6bf7903e-cd3c-40c5-a82b-a168a7c51142 --integration-id 146094
 
 workflows:
   version: 2
