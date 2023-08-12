@@ -1,22 +1,20 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@4.1.1
-
 jobs:
   automated-api-tests:
-    executor: win/default
+    docker:
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
           name: Install Postman CLI
           command: |
-            powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
+            curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - run:
           name: Login using your API key
-          command: postman login --with-api-key $env:POSTMAN_API_KEY
+          command: postman login --with-api-key $POSTMAN_API_KEY
       - run: |
-            postman collection run "29099102-4a422f26-b34f-4ea8-93b7-21823c5a6329" --integration-id "146094-$env:CIRCLE_WORKFLOW_JOB_ID"
+            postman collection run "postman/collections/Pets test.json" --integration-id "146094-${CIRCLE_WORKFLOW_JOB_ID}"
       - run:
           name: Lint your API using Postman CLI
           command: postman api lint 6bf7903e-cd3c-40c5-a82b-a168a7c51142 --integration-id 146094
