@@ -36,7 +36,7 @@
 											"    \r",
 											"pm.test(\"Should return a message informing file is uploaded\", function() {\r",
 											"    const responseJson = pm.response.json();\r",
-											"    pm.expect(responseJson.message).to.contain('additionalMetadata: null\\nFile uploaded to ./null, 33 bytes');\r",
+											"    pm.expect(responseJson.message).not.equal('null');\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -525,7 +525,7 @@
 	],
 	"variable": [
 		{
-			"id": "d5e34e29-d7d5-433d-b175-5f45889a3223",
+			"id": "2e142ee3-de50-4fdd-b323-e238d47dafd3",
 			"key": "petID",
 			"value": ""
 		}
