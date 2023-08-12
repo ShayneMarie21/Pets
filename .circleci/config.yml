@@ -12,7 +12,7 @@ jobs:
             curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - run:
           name: Login using your API key
-          command: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY}}
+          command: postman login --with-api-key $env:POSTMAN_API_KEY
       - run: |
             postman collection run "postman/collections/Pets test.json" --integration-id "146094-${CIRCLE_WORKFLOW_JOB_ID}"
 
